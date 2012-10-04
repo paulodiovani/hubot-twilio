@@ -37,6 +37,8 @@ class Twilio extends Adapter
       response.writeHead 200, 'Content-Type': 'text/plain'
       response.end()
 
+    @emit 'connected'
+
   receive_sms: (body, from) ->
     return if body.length is 0
     user = @userForId from
