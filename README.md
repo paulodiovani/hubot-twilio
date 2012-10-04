@@ -36,7 +36,8 @@ You will need to set some environment variables to use this adapter.
     % export HUBOT_SMS_TOKEN="4ada63e18146a204e468fb6289030231"
 
 Then you will need to set the HTTP endpoint on Twilio to point to your server
-and make sure the request type is set to `GET`.
+and make sure the request type is set to `GET`. The endpoint should have 
+```/hubot/sms``` as the path. 
 
 ## Contribute
 
