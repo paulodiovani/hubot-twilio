@@ -27,6 +27,8 @@ class Twilio extends Adapter
     @hear regex, callback
 
   run: ->
+    self = @
+
     @robot.router.get "/hubot/sms", (request, response) =>
       payload = QS.parse(request.url)
 
@@ -37,7 +39,7 @@ class Twilio extends Adapter
       response.writeHead 200, 'Content-Type': 'text/plain'
       response.end()
 
-    @emit 'connected'
+    self.emit "connected"
 
   receive_sms: (body, from) ->
     return if body.length is 0
