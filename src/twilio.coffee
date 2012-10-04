@@ -1,5 +1,4 @@
-Robot   = require("hubot").Robot
-Adapter = require("hubot").Adapter
+{Robot, Adapter, TextMessage}   = require("hubot")
 
 HTTP    = require "http"
 QS      = require "querystring"
@@ -49,7 +48,7 @@ class Twilio extends Adapter
 
     console.log @receive
     console.log user
-    @receive new Robot.TextMessage user, body
+    @receive new TextMessage user, body
 
   send_sms: (message, to, callback) ->
     auth = new Buffer(@sid + ':' + @token).toString("base64")
