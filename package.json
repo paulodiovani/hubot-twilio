@@ -1,16 +1,15 @@
 {
   "name":        "hubot-twilio",
   "version":     "2.1.0",
-  "author":      "Neil Cauldwell",
-  "keywords":    "github hubot twilio forked adapter",
+  "author":      "Jeremy Karemel",
+  "keywords":    "hubot-twilio adapter",
   "description": "A fork of the original Twilio adapter for hubot",
   "licenses":     [{
     "type":       "MIT",
-    "url":        "http://github.com/neilcauldwell/hubot-twilio/raw/master/LICENSE"
   }],
   "repository" : {
     "type" : "git",
-    "url" : "http://github.com/neilcauldwell/hubot-twilio.git"
+    "url" : "http://github.com/jkarmel/hubot-twilio.git"
   },
   "devDependencies": {
     "coffee-script": "1.1.3"
