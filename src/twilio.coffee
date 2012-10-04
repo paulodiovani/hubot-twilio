@@ -47,6 +47,8 @@ class Twilio extends Adapter
       console.log "I'm adding 'Nurph' as a prefix."
       body = 'Nurph' + '' + body
 
+    console.log @receive
+    console.log user
     @receive new Robot.TextMessage user, body
 
   send_sms: (message, to, callback) ->
