@@ -5,7 +5,7 @@
   "keywords":    "hubot-twilio adapter",
   "description": "A fork of the original Twilio adapter for hubot",
   "licenses":     [{
-    "type":       "MIT",
+    "type":       "MIT"
   }],
   "repository" : {
     "type" : "git",
