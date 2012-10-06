@@ -70,6 +70,8 @@ class Twilio extends Adapter
           json = JSON.parse(body)
           callback body.message
 
+exports.Twilio = Twilio
+
 exports.use = (robot) ->
   new Twilio robot
 
