@@ -18,8 +18,6 @@ class Twilio extends Adapter
     @send_sms message, user.id, (err, body) ->
       if err or not body?
         console.log "Error sending reply SMS: #{err}"
-      else
-        console.log "Sending reply SMS: #{message} to #{user.id}"
 
   reply: (user, strings...) ->
     @send user, str for str in strings
@@ -34,7 +32,6 @@ class Twilio extends Adapter
       payload = QS.parse(request.url)
 
       if payload.Body? and payload.From?
-        console.log "Received SMS: #{payload.Body} from #{payload.From}"
         @receive_sms(payload.Body.trim(), payload.From)
 
       response.writeHead 200, 'Content-Type': 'text/plain'
