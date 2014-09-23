@@ -35,7 +35,7 @@ class Twilio extends Adapter
 
       if payload.Body? and payload.From?
         console.log "Received SMS: #{payload.Body} from #{payload.From}"
-        @receive_sms(payload.Body, payload.From)
+        @receive_sms(payload.Body.trim(), payload.From)
 
       response.writeHead 200, 'Content-Type': 'text/plain'
       response.end()
