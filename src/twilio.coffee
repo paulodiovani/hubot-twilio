@@ -51,6 +51,9 @@ class Twilio extends Adapter
     @receive new TextMessage user, body, 'messageId'
 
   send_sms: (message, to, callback) ->
+    if message.length > 1600
+      message = message.substring(0, 1582) + "...(msg too long)"
+
     auth = new Buffer(@sid + ':' + @token).toString("base64")
     data = QS.stringify From: @from, To: to, Body: message
 
