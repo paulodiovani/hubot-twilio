@@ -52,7 +52,7 @@ class Twilio extends Adapter
     auth = new Buffer(@sid + ':' + @token).toString("base64")
     data = QS.stringify From: @from, To: to, Body: message
 
-    @http("https://api.twilio.com")
+    @robot.http("https://api.twilio.com")
       .path("/2010-04-01/Accounts/#{@sid}/Messages.json")
       .header("Authorization", "Basic #{auth}")
       .header("Content-Type", "application/x-www-form-urlencoded")
