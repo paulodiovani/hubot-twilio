@@ -11,14 +11,13 @@ class Twilio extends Adapter
     @robot = robot
     super robot
 
-  send: (user, strings...) ->
+  send: (envelope, strings...) ->
+    user = envelope.user
     message = strings.join "\n"
 
     @send_sms message, user.id, (err, body) ->
       if err or not body?
         console.log "Error sending reply SMS: #{err}"
-      else
-        console.log "Sending reply SMS: #{message} to #{user.id}"
 
   reply: (user, strings...) ->
     @send user, str for str in strings
@@ -33,8 +32,7 @@ class Twilio extends Adapter
       payload = QS.parse(request.url)
 
       if payload.Body? and payload.From?
-        console.log "Received SMS: #{payload.Body} from #{payload.From}"
-        @receive_sms(payload.Body, payload.From)
+        @receive_sms(payload.Body.trim(), payload.From)
 
       response.writeHead 200, 'Content-Type': 'text/plain'
       response.end()
@@ -43,21 +41,19 @@ class Twilio extends Adapter
 
   receive_sms: (body, from) ->
     return if body.length is 0
-    user = @userForId from
+    user = @robot.brain.userForId from
 
-		# TODO Assign self.robot.name here instead of 
-    # if body.match(/^Nurph\b/i) is null
-    #   console.log "I'm adding 'Nurph' as a prefix."
-    #   body = 'Nurph' + '' + body
-
-    @receive new TextMessage user, body
+    @receive new TextMessage user, body, 'messageId'
 
   send_sms: (message, to, callback) ->
+    if message.length > 1600
+      message = message.substring(0, 1582) + "...(msg too long)"
+
     auth = new Buffer(@sid + ':' + @token).toString("base64")
     data = QS.stringify From: @from, To: to, Body: message
 
-    @http("https://api.twilio.com")
-      .path("/2010-04-01/Accounts/#{@sid}/SMS/Messages.json")
+    @robot.http("https://api.twilio.com")
+      .path("/2010-04-01/Accounts/#{@sid}/Messages.json")
       .header("Authorization", "Basic #{auth}")
       .header("Content-Type", "application/x-www-form-urlencoded")
       .post(data) (err, res, body) ->
