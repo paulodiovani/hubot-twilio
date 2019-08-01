@@ -32,7 +32,6 @@ class Twilio extends Adapter
       payload = request.body
 
       console.log 'payload', payload
-      console.log 'request', request
 
       if payload.Body? and payload.From?
         @receive_sms(payload.Body.trim(), payload.From)
