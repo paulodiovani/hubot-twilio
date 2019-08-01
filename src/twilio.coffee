@@ -29,8 +29,10 @@ class Twilio extends Adapter
     self = @
 
     @robot.router.post "/hubot/sms", (request, response) =>
-      payload = if request.body.payload? then JSON.parse request.body.payload else request.body
-      console.log payload
+      payload = request.body
+
+      console.log 'payload', payload
+      console.log 'request', request
 
       if payload.Body? and payload.From?
         @receive_sms(payload.Body.trim(), payload.From)
