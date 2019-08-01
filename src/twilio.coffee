@@ -28,8 +28,10 @@ class Twilio extends Adapter
   run: ->
     self = @
 
-    @robot.router.get "/hubot/sms", (request, response) =>
-      payload = QS.parse(request.url)
+    @robot.router.post "/hubot/sms", (request, response) =>
+      payload = request.params
+
+      console.log payload
 
       if payload.Body? and payload.From?
         @receive_sms(payload.Body.trim(), payload.From)
@@ -70,4 +72,3 @@ exports.Twilio = Twilio
 
 exports.use = (robot) ->
   new Twilio robot
-
