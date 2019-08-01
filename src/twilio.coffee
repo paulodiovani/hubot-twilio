@@ -26,11 +26,9 @@ class Twilio extends Adapter
     @hear regex, callback
 
   run: ->
-    console.log 'run'
     self = @
 
     @robot.router.post "/hubot/sms", (request, response) =>
-      console.log 'post'
       payload = request.body
 
       console.log 'payload', payload
